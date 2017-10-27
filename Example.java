@@ -49,8 +49,8 @@ class Example {
                 // with postgres on cdf -- but you would replace "dianeh"
                 // with your cdf account name.
                 // Password really does need to be the emtpy string.
-                url = "jdbc:postgresql://localhost:5432/csc343h-dianeh";
-                conn = DriverManager.getConnection(url, "dianeh", "");
+                url = "jdbc:postgresql://localhost:5432/csc343h-leetsz9";
+                conn = DriverManager.getConnection(url, "leetsz9", "");
 
                 // Executing this query without having first prepared it
                 // would be safe because the entire query is hard-coded.  

@@ -61,8 +61,8 @@ class Example {
                 BufferedReader br = new BufferedReader(new 
                       InputStreamReader(System.in));
                 System.out.println("Enter an age? ");
-                String str_age = br.readLine();
-                int age = Integer.parseInt(str_age);
+                String age = br.readLine();
+               
 
                 // Insert that string into the PreparedStatement and execute it.
                 ps.setString(1, age);

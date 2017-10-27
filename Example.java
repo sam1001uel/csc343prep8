@@ -62,10 +62,11 @@ class Example {
                       InputStreamReader(System.in));
                 System.out.println("Enter an age? ");
                 String age = br.readLine();
+                int int_age = Integer.parseInt(age); 
                
-
                 // Insert that string into the PreparedStatement and execute it.
-                ps.setString(1, age);
+                ps.setInt(1, int_age);
+                System.out.println(ps);
                 rs = ps.executeQuery();
 
                 // Iterate through the result set and report on each tuple.

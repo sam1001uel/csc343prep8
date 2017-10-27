@@ -51,42 +51,32 @@ class Example {
                 // Password really does need to be the emtpy string.
                 url = "jdbc:postgresql://localhost:5432/csc343h-leetsz9";
                 conn = DriverManager.getConnection(url, "leetsz9", "");
-
-                // Executing this query without having first prepared it
-                // would be safe because the entire query is hard-coded.  
-                // No one can inject any SQL code into our query.
-                // But let's get in the habit of using a prepared statement.
-                queryString = "select * from guesses where age < 10";
-                pStatement = conn.prepareStatement(queryString);
-                rs = pStatement.executeQuery();
-
-                // Iterate through the result set and report on each tuple.
-                while (rs.next()) {
-                    String name = rs.getString("name");
-                    int guess = rs.getInt("guess");
-                           System.out.println(name + " guessed " + guess);
-                }
                 
                 // The next query depends on user input, so we are wise to
                 // prepare it before inserting the user input.
-                queryString = "select guess from guesses where name = ?";
+                queryString = "select guess from guesses where age >= ?";
                 PreparedStatement ps = conn.prepareStatement(queryString);
 
                 // Find out what string to use when looking up guesses.
                 BufferedReader br = new BufferedReader(new 
                       InputStreamReader(System.in));
-                System.out.println("Look up who? ");
-                String who = br.readLine();
+                System.out.println("Enter an age? ");
+                String str_age = br.readLine();
+                int age = Integer.parseInt(str_age);
 
                 // Insert that string into the PreparedStatement and execute it.
-                ps.setString(1, who);
+                ps.setString(1, age);
                 rs = ps.executeQuery();
 
                 // Iterate through the result set and report on each tuple.
+                int sum = 0;
+                int count = 0;
                 while (rs.next()) {
                     int guess = rs.getInt("guess");
-                    System.out.println("   " + who + " guessed " + guess);
+                    sum = sum + guess;
+                    count++;
                 }
+                System.out.println("The average guess is: " + sum/count);
                 
             }
             catch (SQLException se)

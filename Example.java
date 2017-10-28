@@ -28,7 +28,7 @@ class Example {
             String url;
             Connection conn;
             PreparedStatement pStatement;
-            ResultSet rs;
+            
             String queryString;
 
             try {
@@ -57,7 +57,7 @@ class Example {
                 // Insert that age as int into the PreparedStatement and execute it.
                 ps.setInt(1, int_age);
                 System.out.println(ps);
-                rs = ps.executeQuery();
+                ResultSet rs = ps.executeQuery();
 
                 // Iterate through the result to find the average
                 int sum = 0;
@@ -70,20 +70,20 @@ class Example {
                 System.out.println("The average guess is: " + sum/count);
                 
                 queryString = "select distinct name from guesses";
-                PreparedStatement ps2 = conn.prepareStatement(queryString, rs.TYPE_SCROLL_SENSITIVE);
-                rs = ps2.executeQuery();
+                PreparedStatement ps2 = conn.prepareStatement(queryString, ResultSet.TYPE_SCROLL_SENSITIVE);
+                ResultSet rs2 = ps2.executeQuery();
                 
                 int num_of_names = 0;
-                while (rs.next()) {
+                while (rs2.next()) {
                 		num_of_names++;
                 }
                 System.out.println("Number of names: " + num_of_names);
                 
-                rs.first();
+                rs2.first();
                 int position = 0;
                 String[] names = new String[num_of_names];
-                while (rs.next()) {
-                		names[position] = rs.getString("name");
+                while (rs2.next()) {
+                		names[position] = rs2.getString("name");
                 }
                 System.out.println(names);
             }

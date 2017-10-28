@@ -39,37 +39,27 @@ class Example {
             }
             try
             {
-                // This program connects to my database csc343h-dianeh,
-                // where I have loaded a table called Guess, with this schema:
-                //     Guesses(_number_, name, guess, age)
-                // and put some data into it.
-                
-                // Establish our own connection to the database.
-                // This is the right url, username and password for jdbc
-                // with postgres on cdf -- but you would replace "dianeh"
-                // with your cdf account name.
-                // Password really does need to be the emtpy string.
+                //Connect to database csc343h-leetsz9
                 url = "jdbc:postgresql://localhost:5432/csc343h-leetsz9";
                 conn = DriverManager.getConnection(url, "leetsz9", "");
                 
-                // The next query depends on user input, so we are wise to
-                // prepare it before inserting the user input.
+                //Query #1 
                 queryString = "select guess from guesses where age >= ?";
                 PreparedStatement ps = conn.prepareStatement(queryString);
 
-                // Find out what string to use when looking up guesses.
+                //Prompt user to enter an age
                 BufferedReader br = new BufferedReader(new 
                       InputStreamReader(System.in));
                 System.out.println("Enter an age? ");
                 String age = br.readLine();
                 int int_age = Integer.parseInt(age); 
                
-                // Insert that string into the PreparedStatement and execute it.
+                // Insert that age as int into the PreparedStatement and execute it.
                 ps.setInt(1, int_age);
                 System.out.println(ps);
                 rs = ps.executeQuery();
 
-                // Iterate through the result set and report on each tuple.
+                // Iterate through the result to find the average
                 int sum = 0;
                 int count = 0;
                 while (rs.next()) {
@@ -79,6 +69,23 @@ class Example {
                 }
                 System.out.println("The average guess is: " + sum/count);
                 
+                queryString = "select distinct name from guesses";
+                PreparedStatement ps = conn.prepareStatement(queryString);
+                rs = ps.executeQuery();
+                
+                int num_of_names = 0;
+                while (rs.next()) {
+                		num_of_names++;
+                }
+                System.out.println("Number of names: " + num_of_names);
+                
+                rs.first();
+                int position = 0;
+                String[] names = new String[num_of_names];
+                while (rs.next()) {
+                		names[position] = rs.getString("name");
+                }
+                System.out.println(names);
             }
             catch (SQLException se)
             {

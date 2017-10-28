@@ -88,6 +88,7 @@ class Example {
                 String[] names = new String[num_of_names];
                 while (rs3.next()) {
                 		names[position] = rs3.getString("name");
+                		position++;
                 }
                 System.out.println("The array has length:" + names.length);
                 

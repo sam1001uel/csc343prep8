@@ -69,21 +69,21 @@ class Example {
                 }
                 System.out.println("The average guess is: " + sum/count);
                 
-                queryString = "select distinct name from guesses";
-                PreparedStatement ps2 = conn.prepareStatement(queryString, ResultSet.TYPE_SCROLL_INSENSITIVE);
+                queryString = "select count(distinct name) from guesses";
+                PreparedStatement ps2 = conn.prepareStatement(queryString, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
                 ResultSet rs2 = ps2.executeQuery();
                 
-                int num_of_names = 0;
-                while (rs2.next()) {
-                		num_of_names++;
-                }
+                int num_of_names = rs2.getInt("count");              
                 System.out.println("Number of names: " + num_of_names);
                 
-                rs2.first();
+                queryString = "select distinct name from guesses";
+                PreparedStatement ps3 = conn.prepareStatement(queryString);
+                ResultSet rs3 = ps3.executeQuery();
+                
                 int position = 0;
                 String[] names = new String[num_of_names];
-                while (rs2.next()) {
-                		names[position] = rs2.getString("name");
+                while (rs3.next()) {
+                		names[position] = rs3.getString("name");
                 }
                 System.out.println(names);
             }

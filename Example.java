@@ -70,8 +70,8 @@ class Example {
                 System.out.println("The average guess is: " + sum/count);
                 
                 queryString = "select distinct name from guesses";
-                PreparedStatement ps = conn.prepareStatement(queryString);
-                rs = ps.executeQuery();
+                PreparedStatement ps2 = conn.prepareStatement(queryString);
+                rs = ps2.executeQuery();
                 
                 int num_of_names = 0;
                 while (rs.next()) {

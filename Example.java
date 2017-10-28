@@ -73,7 +73,7 @@ class Example {
                 PreparedStatement ps2 = conn.prepareStatement(queryString, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
                 ResultSet rs2 = ps2.executeQuery();
                 
-                int num_of_names = rs2.getInt("count");              
+                int num_of_names = rs2.next().getInt("count");              
                 System.out.println("Number of names: " + num_of_names);
                 
                 queryString = "select distinct name from guesses";

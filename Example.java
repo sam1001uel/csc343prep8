@@ -89,9 +89,12 @@ class Example {
                 while (rs3.next()) {
                 		names[position] = rs3.getString("name");
                 }
-                 int i = 0;
+                System.out.println("The array has length:" + names.length);
+                
+                int i = 0;
                 while (i < names.length) {
                 		System.out.println(names[i]);
+                		i++;
                 }
                 
             }

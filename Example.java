@@ -89,7 +89,11 @@ class Example {
                 while (rs3.next()) {
                 		names[position] = rs3.getString("name");
                 }
-                System.out.println(names);
+                 int i = 0;
+                while (i < names.length) {
+                		System.out.println(names[i]);
+                }
+                
             }
             catch (SQLException se)
             {

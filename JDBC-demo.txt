@@ -1,0 +1,14 @@
+dbsrv1:~/csc343db/csc343prep8$ psql csc343h-leetsz9
+psql (9.5.9, server 9.5.8)
+Type "help" for help.
+
+csc343h-leetsz9=> \i jelly-beans.sql 
+CREATE TABLE
+INSERT 0 11
+csc343h-leetsz9=> \q
+dbsrv1:~/csc343db/csc343prep8$ javac Example.java
+dbsrv1:~/csc343db/csc343prep8$ java -cp /local/packages/jdbc-postgresql/postgresql-42.1.4.jar: Example
+Enter an age? 
+6
+select guess from guesses where age >= 6
+The average guess is: 628
